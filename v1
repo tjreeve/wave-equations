@@ -1,0 +1,54 @@
+#define _USE_MATH_DEFINES
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+//y(x,t) = Asin(kx - wt + o)
+
+double angular_wavenumber(double wavelength) {
+    return (2 * M_PI / wavelength);
+}
+
+double angular_frequency(double period) {
+    return (2 * M_PI / period);
+}
+
+int main()
+{
+    double k = angular_wavenumber(10);
+    double w = angular_frequency(0.05);
+    double A = 2;
+    cout << "Would you like the wave profile at a particular point in space or time? " << endl;
+    string answer{};
+    cin >> answer;
+    
+    if (answer == "space")
+    {
+        cout << endl << "Point in space, in cm: ";
+        double x{};
+        cin >> x;
+        double y = A * sin(k * x);
+        double y_x10 = round(y * 10);
+        double y_2dp = y_x10 / 10;
+
+        cout << "The point is displaced by " << y_2dp << "cm at a point " << x << "cm from the origin.\n";
+    }
+    else if (answer == "time")
+    {
+        cout << endl << "Point in time, in seconds: ";
+        double t{};
+        cin >> t;
+        double y = A * sin(w * t);
+        double y_x10 = round(y * 10);
+        double y_2dp = y_x10 / 10;
+
+        cout << "The point is displaced by " << y_2dp << "cm after " << t << " seconds.\n";
+    }
+    else 
+    {
+        cout << "please enter space or time\n";
+    }
+    return 0;
+}
